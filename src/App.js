@@ -1,14 +1,20 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './App.css';
 import News from './components/News/News';
 
 function App() {
   const [articles,setArticles] = useState([]);
+  // useEffect(()=>{
+  //   const url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=e6345d9b130041e3b26b945c8f2f01ba';
+  //   fetch(url)
+  //   .then(res=>res.json())
+  //   .then(data=>setArticles(data.articles))
+  // },[])
   useEffect(()=>{
     const url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=e6345d9b130041e3b26b945c8f2f01ba';
-    fetch(url)
-    .then(res=>res.json())
-    .then(data=>setArticles(data.articles))
+    axios(url)
+    .then(data=>setArticles(data.data.articles))
   },[])
   return (
     <div>
